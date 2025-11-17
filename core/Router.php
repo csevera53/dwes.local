@@ -1,10 +1,9 @@
 <?php
-
 namespace dwes\core;
-
 use dwes\app\exceptions\NotFoundException;
 use dwes\app\exceptions\AppException;
-
+use dwes\core\App;
+require_once __DIR__ . "/../app/exceptions/NotFoundException.php";
 class Router
 {
 
@@ -47,7 +46,6 @@ class Router
      * @throws NotFoundException
      * @throws AppException
      */
-
     public function direct(string $uri, string $method): void
     {
         // Recorremos las rutas y separamos las dos partes: las rutas y sus controladores respectivamente
@@ -67,6 +65,22 @@ class Router
         throw new NotFoundException("No se ha definido una ruta para la uri solicitada");
     }
 
+    private function prepareRoute(string $route): string
+    {
+        // Se busca todo lo que comienze por /: para sustituir p.e. :id
+        $urlRule = preg_replace('/:([^\/]+)/', '(?<\1>[^/]+)', $route);
+        $urlRule = str_replace('/', '\/', $urlRule);
+        return '/^' . $urlRule . '\/*$/s';
+    }
+    private function getParametersRoute(string $route, array $matches)
+    {
+        preg_match_all('/:([^\/]+)/', $route, $parameterNames);
+        $parameterNames = array_flip($parameterNames[1]);
+        // Obtenemos el array de parámetros que hay que pasar al controlador
+        return array_intersect_key($matches, $parameterNames);
+    }
+
+
     /**
      * @param string $controller
      * @param string $action
@@ -81,7 +95,6 @@ class Router
             $objController = new $controller();
             if (!method_exists($objController, $action))
                 throw new NotFoundException("El controlador $controller no responde al action $action");
-            $objController->$action();
             //$objController->$action();
             // Llamamo al action del controlador pasándole los parámetros
             call_user_func_array(array($objController, $action), $parameters);
@@ -90,24 +103,10 @@ class Router
             return false;
         }
     }
+
+
     public function redirect(string $path)
     {
         header('location: /' . $path);
-    }
-    private function prepareRoute(string $route): string
-    {
-        // Se busca todo lo que comienze por /: para sustituir p.e. :id
-        $urlRule = preg_replace('/:([^\/]+)/', '(?<\1>[^/]+)', $route);
-        $urlRule = str_replace('/', '\/', $urlRule);
-        return '/^' . $urlRule . '\/*$/s';
-    }
-    private function getParametersRoute(string $route, array $matches)
-    {
-        preg_match_all('/:([^\/]+)/', $route, $parameterNames);
-        $parameterNames = array_flip($parameterNames[1]);
-        // Obtenemos el array de parámetros que hay que pasar al controlador
-        return array_intersect_key($matches, $parameterNames);
-
-
     }
 }
