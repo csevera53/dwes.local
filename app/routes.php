@@ -11,3 +11,7 @@ $router->post('galeria/nueva', 'GaleriaController@nueva');
 $router->post('asociados/nuevo', 'AsociadoController@nueva');
 
 $router->get ('galeria/:id', 'GaleriaController@show');
+
+$router->get ('login', 'AuthController@login');
+$router->post('check-login', 'AuthController@checkLogin');
+$router->get ('logout', 'AuthController@logout');

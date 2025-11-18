@@ -3,6 +3,8 @@ namespace dwes\core;
 use dwes\app\exceptions\NotFoundException;
 use dwes\app\exceptions\AppException;
 use dwes\core\App;
+
+
 require_once __DIR__ . "/../app/exceptions/NotFoundException.php";
 class Router
 {
@@ -108,5 +110,6 @@ class Router
     public function redirect(string $path)
     {
         header('location: /' . $path);
+        exit();
     }
 }

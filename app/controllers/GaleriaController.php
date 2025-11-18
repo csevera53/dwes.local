@@ -58,15 +58,10 @@ class GaleriaController
                 $imagenGaleria = new Imagen($imagen->getFileName(), $descripcion);
                 $imagenesRepository->save($imagenGaleria);
 
-                
-                
-
                 $mensaje = "Se ha guardado una imagen: " . $imagenGaleria->getNombre();
                 App::get('logger')->add($mensaje);
                 $mensaje = FlashMessage::get('mensaje');
 
-                // $mensaje = "Se ha guardado la imagen correctamente";
-                // $imagenes = $imagenesRepository->findAll();
             }
         } catch (FileException $fileException) {
             FlashMessage::set('errores' , [$fileException->getMessage()]);

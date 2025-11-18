@@ -18,11 +18,18 @@ use dwes\app\utils\Utils;
         </div>
         <div class="collapse navbar-collapse navbar-right" id="menu">
             <ul class="nav navbar-nav">
+                
                 <?php
                 if (Utils::esOpcionMenuActiva('/index') == true || utils::esOpcionMenuActiva('/') == true)
                     echo '<li class="active lien">';
                 else echo '<li class=”lien”>'; ?>
                 <a href="/"><i class="fa fa-home sr-icons"></i> Home</a></li>
+                <?php if (is_null($app['user'])) : ?>
+                <?php 
+                if (Utils::esOpcionMenuActiva('/login') == true) echo '<li class="active lien">';
+                else echo '<li class=" lien">'; ?>
+                <a href="/login"><i class="fa fa-user-secret sr-icons"></i> Login</a></li>
+                <?php else : ?>
                 <?php
                 if (Utils::esOpcionMenuActiva('/galeria') == true || Utils::esOpcionMenuActiva('/') == true)
                     echo '<li class="active lien">';
@@ -54,7 +61,11 @@ use dwes\app\utils\Utils;
                     else echo '<li class=”lien”>'; ?>
                     <a href="/contact"><i class="fa fa-phone-square sr-icons"></i> Contact</a>
                 </li>
-
+                <?php 
+                if (Utils::esOpcionMenuActiva('/logout') == true) echo '<li class="active lien">';
+                else echo '<li class=" lien">'; ?>
+                <a href="/logout"><i class="fa fa-sign-out sr-icons"></i> <?= $app['user']->getUsername() ?></a></li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
