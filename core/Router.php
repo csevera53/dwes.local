@@ -1,7 +1,10 @@
 <?php
+
 namespace dwes\core;
+
 use dwes\app\exceptions\NotFoundException;
 use dwes\app\exceptions\AppException;
+use dwes\app\exceptions\AuthenticationException;
 use dwes\core\App;
 
 
@@ -32,13 +35,19 @@ class Router
      * @param array $routes
      * @return void
      */
-    public function get(string $uri, string $controller): void
+    public function get(string $uri, string $controller, $role = 'ROLE_ANONYMOUS'): void
     {
-        $this->routes['GET'][$uri] = $controller;
+        $this->routes['GET'][$uri] = [
+            'controller' => $controller,
+            'role' => $role
+        ];
     }
-    public function post(string $uri, string $controller): void
+    public function post(string $uri, string $controller, $role = 'ROLE_ANONYMOUS'): void
     {
-        $this->routes['POST'][$uri] = $controller;
+        $this->routes['POST'][$uri] = [
+            'controller' => $controller,
+            'role' => $role
+        ];
     }
 
     /**
@@ -51,17 +60,27 @@ class Router
     public function direct(string $uri, string $method): void
     {
         // Recorremos las rutas y separamos las dos partes: las rutas y sus controladores respectivamente
-        foreach ($this->routes[$method] as $route => $controller) {
+        foreach ($this->routes[$method] as $route => $routerData) {
+            $controller = $routerData['controller'];
+            $minRole = $routerData['role'];
+
             // Se cambia el contenido de la ruta por una forma que nos vendrá mejor
             $urlRule = $this->prepareRoute($route);
             if (preg_match($urlRule, $uri, $matches) === 1) {
-                $parameters = $this->getParametersRoute($route, $matches);
-                // Extraemos el nombre del controlador (nombre de la clase) del nombre del
-                // action (nombre del método a llamar) y los pasamos a 2 variables
-                list($controller, $action) = explode('@', $controller);
-                // Se encarga de crear un objeto de la clase controller y llama al action adecuado
-                if ($this->callAction($controller, $action, $parameters) === true)
-                    return;
+                if (Security::isUserGranted($minRole) === false) {
+                    if (!is_null(App::get('appUser'))) // Comprobamos si se está logueado
+                        throw new AuthenticationException('Acceso no autorizado');
+                    else
+                        $this->redirect('login'); // Si el usuario no se ha logueado, redireccionamos al login
+                } else {
+                    $parameters = $this->getParametersRoute($route, $matches);
+                    // Extraemos el nombre del controlador (nombre de la clase) del nombre del
+                    // action (nombre del método a llamar) y los pasamos a 2 variables
+                    list($controller, $action) = explode('@', $controller);
+                    // Se encarga de crear un objeto de la clase controller y llama al action adecuado
+                    if ($this->callAction($controller, $action, $parameters) === true)
+                        return;
+                }
             }
         }
         throw new NotFoundException("No se ha definido una ruta para la uri solicitada");
