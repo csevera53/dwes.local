@@ -1,8 +1,3 @@
-<?php
-// require_once __DIR__ . '/inicio.part.php';
-// require_once __DIR__ . '/navegacion.part.php';
-?>
-
 <!-- Principal Content Start -->
 <div id="single">
   <div class="container">
@@ -145,7 +140,3 @@
   </div>
 </div>
 <!-- End of Principal Content Start -->
-
-<?php
-// require_once __DIR__ . '/fin.part.php';
-?>

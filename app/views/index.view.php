@@ -1,10 +1,4 @@
-<?php
-//Se quitan en el 16.2.5
-// require_once __DIR__ . '/inicio.part.php';
-// require_once __DIR__ . '/navegacion.part.php';
-
-use dwes\app\utils\Utils;
-?>
+<?php use dwes\app\utils\Utils; ?>
 <!-- End of Navigation Bar -->
 <!-- Principal Content Start -->
 <div id="index">
@@ -111,6 +105,3 @@ use dwes\app\utils\Utils;
 
 </div><!-- End of index box -->
 
-<?php
-//Se quitan en el 16.2.5
-// require_once __DIR__ . "/fin.part.php";

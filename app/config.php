@@ -28,6 +28,4 @@ return [
         'ROLE_ANONYMOUS' => 1
         ]
     ]
-
-
 ];

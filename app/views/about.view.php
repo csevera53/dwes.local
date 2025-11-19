@@ -1,8 +1,3 @@
-<?php
-//  require_once __DIR__ . '/inicio.part.php';
-//  require_once __DIR__ . '/navegacion.part.php';
-?>
-
 <!-- Principal Content Start-->
 <div id="about">
 
@@ -141,7 +136,3 @@
     <!-- End of container Box -->
 </div>
 <!-- End of principal content -->
-
-<?php
-//  require_once __DIR__ . '/fin.part.php';
-?>
