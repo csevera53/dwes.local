@@ -43,9 +43,14 @@ class Imagen implements IEntity
      */
     private $numDownloads;
 
+    /**
+     * @var int
+     */
+     private $usuario_id;
 
 
-    public function __construct(string $nombre = "", string $descripcion = "", int $categoria = 0, int $numVisualizaciones = 0, int $numLikes = 0, int $numDownloads = 0)
+    public function __construct(string $nombre = "", string $descripcion = "", int $categoria = 0,
+     int $numVisualizaciones = 0, int $numLikes = 0, int $numDownloads = 0,?int $usuario_id = null)
     {
         $this->id = null;
         $this->nombre = $nombre;
@@ -54,6 +59,7 @@ class Imagen implements IEntity
         $this->numVisualizaciones = $numVisualizaciones;
         $this->numLikes = $numLikes;
         $this->numDownloads = $numDownloads;
+        $this->usuario_id = $usuario_id;
     }
 
     /**
@@ -111,6 +117,13 @@ class Imagen implements IEntity
     {
         return $this->numDownloads;
     }
+    /**
+     * @return int
+     */
+    public function getUsuarioId(): ?int
+    {
+        return $this->usuario_id;
+    }
 
     public function getUrlPortfolio(): string
     {
@@ -131,6 +144,7 @@ class Imagen implements IEntity
     {
         return self::RUTA_IMAGENES_SUBIDAS . $this->getNombre();
     }
+    
 
     /**
      * @param int $id
@@ -195,6 +209,16 @@ class Imagen implements IEntity
         $this->numDownloads = $numDownloads;
         return $this;
     }
+
+    /**
+     * @param int $usuario_id
+     * @return Imagen
+     */
+    public function setUsuarioId(int $usuario_id): Imagen
+    {
+        $this->usuario_id = $usuario_id;
+        return $this;
+    }
     /**
      * @return string
      */
@@ -213,7 +237,8 @@ class Imagen implements IEntity
             'numVisualizaciones' => $this->getNumVisualizaciones(),
             'numLikes' => $this->getNumLikes(),
             'numDownloads' => $this->getNumDownloads(),
-            'categoria' => $this->getCategoria()
+            'categoria' => $this->getCategoria(),
+            'usuario_id' => $this->getUsuarioId()
         ];
     }
 }

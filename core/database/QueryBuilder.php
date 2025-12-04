@@ -44,6 +44,14 @@ class QueryBuilder
             throw new NotFoundException("No se ha encontrado ningún elemento con id $id.");
         return $result[0]; // La consulta devolverá un array con 1 solo elemento.
     }
+
+    public function findByUsuario(int $idUsuario): array
+    {
+        $sql = "SELECT * FROM $this->table WHERE usuario_id = :usuario_id";
+        return $this->executeQuery($sql, ['usuario_id' => $idUsuario]);
+    }
+
+
     /**
      * @param string $sql
      * @return array
@@ -139,5 +147,28 @@ class QueryBuilder
         if (count($result) > 0)
             return $result[0];
         return null;
+    }
+
+    public function borrar(int $id): void
+    {
+        try {
+            $sql = "DELETE FROM $this->table WHERE id = :id";
+            $imagenBorrar = $this->connection->prepare($sql);
+            $imagenBorrar->execute(['id' => $id]);
+        } catch (PDOException $exception) {
+            throw new QueryException("No se ha podido eliminar el elemento con id $id: " . $exception->getMessage());
+        }
+    }
+    
+    public function findExposByUsuario(int $idUsuario): array
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE usuario = :usuario ORDER BY id DESC";
+        return $this->executeQuery($sql, ['usuario' => $idUsuario]);
+    }
+
+    public function findActivas(): array
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE activa = 1 ORDER BY fecha_inicio DESC";
+        return $this->executeQuery($sql);
     }
 }

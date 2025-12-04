@@ -52,7 +52,7 @@
                     <tbody>
                         <?php foreach ($imagenes as $imagen) : ?>
                             <tr>
-                                <th scope="row"><?= $imagen->getNombre() ?></th>
+                                <th scope="row"><a href='/galeria/<?= $imagen->getId() ?>' > <?= $imagen->getNombre() ?></a></th> 
                                 <td>
                                     <img src="<?= $imagen->getUrlSubidas() ?>"
                                         alt="<?= $imagen->getDescripcion() ?>"

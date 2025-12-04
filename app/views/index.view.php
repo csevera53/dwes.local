@@ -38,6 +38,8 @@
 
       <!-- First Category pictures -->
 
+
+      <!-- DA ERROR PERO FUNCIONA -->
       <?php
       $idCategoria = 1;
       shuffle($imagenesHome);

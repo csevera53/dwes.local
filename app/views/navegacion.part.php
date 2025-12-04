@@ -1,4 +1,6 @@
-<?php use dwes\app\utils\Utils; ?>
+<?php
+
+use dwes\app\utils\Utils; ?>
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-fixed-top navbar-default">
@@ -41,7 +43,14 @@
           else
             echo '<li class=”lien”>';
           ?><a href="/galeria"><i class="fa fa-bookmark sr-icons"></i> Galeria</a></li>
-
+          <?php
+          if (Utils::esOpcionMenuActiva('/exposiciones') == true)
+            echo '<li class="active lien">';
+          else
+            echo '<li class="lien">';
+          ?>
+          <a href="/exposiciones"><i class="fa fa-picture-o sr-icons"></i> Exposiciones</a>
+          </li>
           <?php
           if (Utils::esOpcionMenuActiva('/asociados') == true)
             echo '<li class="active lien">';

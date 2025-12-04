@@ -1,10 +1,18 @@
+<style>
+    .sol img.img-responsive{
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
+
 <div id="category<?= $idCategoria ?>" class="tab-pane active" >
     <div class="row popup-gallery">
         
     <?php foreach($imagenesHome as $imagen) { ?>
         <div class="col-xs-12 col-sm-6 col-md-3">
         <div class="sol">
-            <img class="img-responsive" src="<?= $imagen->getUrlPortfolio() ?>" alt="<?= $imagen->getDescripcion() ?>">
+            <img class="img-responsive" src="<?= $imagen->getUrlSubidas() ?>" alt="<?= $imagen->getDescripcion() ?>">
             <div class="behind">
                 <div class="head text-center">
                 <ul class="list-inline">
