@@ -23,10 +23,8 @@ class Exposicion implements IEntity
         $this->descripcion = $descripcion;
         $this->activa = $activa;
         $this->usuario = $usuario;
-        // NO inicializamos las fechas porque se asignan automáticamente en la BD
     }
 
-    // Getters
     public function getId(): int
     {
         return $this->id;
@@ -62,7 +60,6 @@ class Exposicion implements IEntity
         return $this->usuario;
     }
 
-    // Setters
     public function setId(int $id): void
     {
         $this->id = $id;
@@ -98,10 +95,6 @@ class Exposicion implements IEntity
         $this->usuario = $usuario;
     }
 
-    /**
-     * Convierte la entidad a array para guardar en BD
-     * NO incluimos id (autoincremental) ni fechas (CURRENT_TIMESTAMP)
-     */
     public function toArray(): array
     {
         return [

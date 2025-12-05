@@ -15,16 +15,13 @@
 
             </div>
             <br>
-            <a href="/galeria/editar/<?= $imagen->getId() ?>" class="btn btn-primary btn-lg sr-button">
+            <a href="/galeria/editar/<?= $imagen->getId() ?>" class="btn btn-primary btn-lg">
                 <i class="fa fa-edit"></i> Editar imagen
             </a>
             <a href="/galeria/eliminar/<?= $imagen->getId() ?>"
-                class="btn btn-danger btn-lg sr-button"
+                class="btn btn-danger btn-lg"
                 onclick="return confirm('¿Estás seguro de que quieres eliminar esta imagen? Esta acción no se puede deshacer.')">
                 <i class="fa fa-trash"></i> Borrar imagen
-            </a>
-            <a href="/galeria" class="btn btn-default btn-lg sr-button">
-                <i class="fa fa-arrow-left"></i> Volver a Galería
             </a>
 
         </div>

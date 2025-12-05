@@ -52,7 +52,7 @@
                     <tbody>
                         <?php foreach ($imagenes as $imagen) : ?>
                             <tr>
-                                <th scope="row"><a href='/galeria/<?= $imagen->getId() ?>' > <?= $imagen->getNombre() ?></a></th> 
+                                <th scope="row"><a href='/galeria/<?= $imagen->getId() ?>'> <?= $imagen->getNombre() ?></a></th>
                                 <td>
                                     <img src="<?= $imagen->getUrlSubidas() ?>"
                                         alt="<?= $imagen->getDescripcion() ?>"
@@ -62,6 +62,13 @@
                                 <td><?= $imagen->getNumVisualizaciones() ?></td>
                                 <td><?= $imagen->getNumLikes() ?></td>
                                 <td><?= $imagen->getNumDownloads() ?></td>
+                                <td>
+                                    <a href="/exposiciones/anadirimagen/<?= $imagen->getId() ?>"
+                                        class="btn btn-sm btn-primary"
+                                        title="Añadir a exposición">
+                                        <i class="fa"></i> Añadir a exposición
+                                    </a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -23,6 +23,11 @@ $router->get ('galeria/eliminar/:id', 'GaleriaController@eliminar', 'ROLE_ADMIN'
 
 $router->get ('exposiciones', 'ExposicionController@index', 'ROLE_USER');
 $router->post ('exposiciones/nueva', 'ExposicionController@nueva', 'ROLE_USER');
+$router->get ('exposiciones/listado', 'ExposicionController@listado', 'ROLE_USER');
+
+$router->get ('exposiciones/anadirimagen/:id', 'ExposicionController@anadirImagen', 'ROLE_USER');
+$router->post('exposiciones/guardarimagen/:imagenid/:exposicionid', 'ExposicionController@guardarImagen', 'ROLE_USER');
+$router->get ('exposiciones/:id', 'ExposicionController@show', 'ROLE_USER');
 
 $router->get ('login', 'AuthController@login');
 $router->post('check-login', 'AuthController@checkLogin');

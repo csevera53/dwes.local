@@ -52,6 +52,14 @@ use dwes\app\utils\Utils; ?>
           <a href="/exposiciones"><i class="fa fa-picture-o sr-icons"></i> Exposiciones</a>
           </li>
           <?php
+          if (Utils::esOpcionMenuActiva('/exposiciones/listado') == true)
+            echo '<li class="active lien">';
+          else
+            echo '<li class="lien">';
+          ?>
+          <a href="/exposiciones/listado"><i class="fa fa-picture-o sr-icons"></i> Lista Expos</a>
+          </li>
+          <?php
           if (Utils::esOpcionMenuActiva('/asociados') == true)
             echo '<li class="active lien">';
           else
