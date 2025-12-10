@@ -215,27 +215,4 @@ class QueryBuilder
             throw new QueryException("Error al obtener IDs: " . $exception->getMessage());
         }
     }
-    public function count(array $filters = []): int
-    {
-        $sql = "SELECT COUNT(*) as total FROM {$this->table}" . $this->getFilters($filters);
-        
-        try {
-            $statement = $this->connection->prepare($sql);
-            $statement->execute($filters);
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            
-            return (int)$result['total'];
-        } catch (PDOException $exception) {
-            throw new QueryException("Error al contar registros: " . $exception->getMessage());
-        }
-    }
-
-    /**
-     * @param array $filters
-     * @return bool
-     */
-    public function exists(array $filters): bool
-    {
-        return $this->count($filters) > 0;
-    }
 }

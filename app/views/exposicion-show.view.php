@@ -26,7 +26,6 @@
         <div class="col-xs-12">
             <?php include __DIR__ . '/show-error.part.view.php'; ?>
 
-            <!-- Información de la exposición -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -73,19 +72,11 @@
             </div>
 
             <hr>
-
-            <!-- Sección de imágenes -->
             <h2>
                 Imágenes de la Exposición 
             </h2>
             <hr>
 
-            <?php if (empty($imagenes)): ?>
-                <div>
-                    <h4>Esta exposición no tiene imágenes todavía</h4>
-                    <p>Puedes añadir imágenes desde la <a href="/galeria">galería</a>.</p>
-                </div>
-            <?php else: ?>
                 <div class="row">
                     <?php foreach ($imagenes as $imagen): ?>
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 30px;">
@@ -105,7 +96,6 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
-            <?php endif; ?>
 
             <hr>
         </div>

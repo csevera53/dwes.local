@@ -17,9 +17,9 @@ $router->get  ('post', 'PageController@post');
 $router->get ('galeria', 'GaleriaController@index');
 $router->post('galeria/nueva', 'GaleriaController@nueva', 'ROLE_USER');
 $router->get ('galeria/:id', 'GaleriaController@show');
-$router->get ('galeria/editar/:id', 'GaleriaController@editar', 'ROLE_ADMIN');
-$router->post('galeria/actualizar/:id', 'GaleriaController@actualizar', 'ROLE_ADMIN');
-$router->get ('galeria/eliminar/:id', 'GaleriaController@eliminar', 'ROLE_ADMIN');
+$router->get ('galeria/editar/:id', 'GaleriaController@editar', 'ROLE_USER');
+$router->post('galeria/actualizar/:id', 'GaleriaController@actualizar', 'ROLE_USER');
+$router->get ('galeria/eliminar/:id', 'GaleriaController@eliminar', 'ROLE_USER');
 
 $router->get ('exposiciones', 'ExposicionController@index', 'ROLE_USER');
 $router->post ('exposiciones/nueva', 'ExposicionController@nueva', 'ROLE_USER');

@@ -11,17 +11,14 @@
     </div>
 </div>
 
-<!-- Principal Content Start -->
 <div id="exposiciones">
     <div class="container">
         <div class="col-xs-12 col-sm-8 col-sm-push-2">
             <h2>Crear nueva exposición:</h2>
             <hr>
             
-            <!-- Mostrar errores y mensajes -->
             <?php include __DIR__ . '/show-error.part.view.php'; ?>
             
-            <!-- Formulario para crear exposición -->
             <form class="form-horizontal" action="/exposiciones/nueva" method="post">
                 <div class="form-group">
                     <div class="col-xs-12">
@@ -54,7 +51,6 @@
             
             <hr class="divider">
             
-            <!-- Listado de exposiciones -->
             <h2>Mis exposiciones:</h2>
             <div class="tabla-exposiciones">
                 <table class="table table-striped">
